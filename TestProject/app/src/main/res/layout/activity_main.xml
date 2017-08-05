@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!--as like java pacakages all xml design syntex lies in  NAME SPACES --><!-- -->
+
+<!-- famous name spaces are as   ANDROID, TOOLS, APP--><!-- every tag in andorid xml 2 properties are neccessary
+width and height
+-->
+
+<!--  ALT+CRTL+L is code format-->
+<!--match paernt  = fills out all the parent screen-->
+<!--wrap content = wrap itself around the content in it-->
+<!--linear layout is bydefault horizontal-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    >
+
+
+
+</LinearLayout>
