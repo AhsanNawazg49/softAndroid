@@ -9,14 +9,14 @@ public class MoviesModel {
     public int thumnailIds;
     public String Title;
     public String SubTitle;
-    public String LikesTitle;
-    public String DislikesTitle;
+    public String likes;
+    public String Dislikes;
 
-    public MoviesModel(int thumnailIds, String title, String subTitle, String likesTitle, String dislikesTitle) {
+    public MoviesModel(int thumnailIds, String title, String subTitle, String likes, String dislikes) {
         this.thumnailIds = thumnailIds;
         this.Title = title;
         this.SubTitle = subTitle;
-        this.LikesTitle = likesTitle;
-        this. DislikesTitle = dislikesTitle;
+        this.likes = likes;
+        this. Dislikes = dislikes;
     }
 }
