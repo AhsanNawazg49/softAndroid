@@ -15,6 +15,7 @@ public class DBMS extends SQLiteOpenHelper {
     public static String DBName = "UserDatabase.db";
     public static int DBVersion = 1;
     public String UserDetailTableQuery = "CREATE TABLE user_details(p_name TEXT,p_Fname TEXT,p_password TEXT,P_address TEXT)";
+//    public String UserDetailTableQuery = "CREATE TABLE user_details(p_name TEXT PRIMARY KEY,p_Fname TEXT UNIQUE,p_password TEXT,P_address TEXT)";
 
     public DBMS(Context context) {
         super(context, DBName, null, DBVersion);
@@ -54,6 +55,18 @@ public class DBMS extends SQLiteOpenHelper {
         };
 
         Cursor mCursor =  db.query("user_details",projections,null,null,null,null,null);
+        return mCursor;
+    }
+
+    public Cursor checkUserLogedIn(SQLiteDatabase db,String Name,String Pass){
+        String[] selectionArgs = {
+                "p_name",
+                "p_Fname",
+                "p_password",
+                "P_address"
+        };
+
+        Cursor mCursor = db.rawQuery("Select * from user_details where p_name = '"+Name+"'AND p_password = '"+Pass+"'",null);
         return mCursor;
     }
 }

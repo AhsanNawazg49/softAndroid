@@ -1,5 +1,6 @@
 package com.grimreaper.sqlitepracticeapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     edtTxtFName.setText("");
                     edtTxtPass.setText("");
                     edtTxtAddress.setText("");
-
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    finish();
 
                 }
 
