@@ -16,12 +16,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edtTxtName, edtTxtFName, edtTxtPass, edtTxtAddress;
-    String name, fname, pass, address;
+    EditText edtTxtName, edtTxtEmail, edtTxtPass, edtTxtAddress;
+    String name, pEmail, pass, address;
     Button btnRegister,btnGetAllUsers;
 
     @Override
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         edtTxtName = (EditText) findViewById(R.id.edt_txt_name);
-        edtTxtFName = (EditText) findViewById(R.id.edt_txt_fname);
+        edtTxtEmail = (EditText) findViewById(R.id.edt_txt_email);
         edtTxtPass = (EditText) findViewById(R.id.edt_txt_pass);
         edtTxtAddress = (EditText) findViewById(R.id.edt_txt_address);
 
@@ -41,18 +42,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                /taking all the entered values from the user
                 name = edtTxtName.getText().toString();
-                fname = edtTxtFName.getText().toString();
+                pEmail = edtTxtEmail.getText().toString();
                 pass = edtTxtPass.getText().toString();
                 address = edtTxtAddress.getText().toString();
 
-                if (name.isEmpty() || fname.isEmpty() || pass.isEmpty() || address.isEmpty()) {
+                if (name.isEmpty() || pEmail.isEmpty() || pass.isEmpty() || address.isEmpty()) {
                     edtTxtName.setError("Form Not Filled");
-                    edtTxtFName.setError("Form Not Filled");
+                    edtTxtEmail.setError("Form Not Filled");
                     edtTxtPass.setError("Form Not Filled");
                     edtTxtAddress.setError("Form Not Filled");
                 } else {
 //                    here we will use the DBMS features
-
+                    InsertNewUser(name,pEmail,pass,address);
                 }
 
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //    Insert New User Method
-public void InsertNewUser(String Name,String Email,String Pass,String Address){
+public void InsertNewUser(final String Name, final String pEmail, final String Pass, final String Address){
 
     //        StringRequest mStringRequest = new StringRequest(Request.Method.POST,);
     StringRequest mStringRequest = new StringRequest(1,getApplicationContext().getResources().getString(R.string.InsertNewUserUrl) , new Response.Listener<String>() {
@@ -85,7 +86,12 @@ public void InsertNewUser(String Name,String Email,String Pass,String Address){
     }){
         @Override
         protected Map<String, String> getParams() throws AuthFailureError {
-            return super.getParams();
+            Map<String, String> params = new HashMap<>();
+            params.put("PersonName",Name);
+            params.put("PersonEmail",pEmail);
+            params.put("PersonPass",Pass);
+            params.put("PersonAddress",Address);
+            return params;
         }
     };
 
