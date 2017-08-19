@@ -16,6 +16,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnGetAllUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                BringMeTheServerResponse();
             }
         });
     }
@@ -108,6 +111,28 @@ public void InsertNewUser(final String Name, final String pEmail, final String P
             @Override
             public void onResponse(String response) {
                 Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject mJSonObject = new JSONObject(response);
+                    JSONArray resultArray = mJSonObject.getJSONArray("result");
+                    int lengthOfArray = resultArray.length();
+
+                    for(int i = 0;i<lengthOfArray;i++){
+                        JSONObject incomingJsonObject = resultArray.getJSONObject(i);
+                        String pName = incomingJsonObject.getString("p_name");
+                        String pEmail = incomingJsonObject.getString("p_email");
+                        String pPassword = incomingJsonObject.getString("p_password");
+                        String pAddress = incomingJsonObject.getString("p_address");
+
+                        String PersonDetaill = pName+" "+ pEmail+" "+ pPassword+" "+ pAddress;
+
+                        Toast.makeText(MainActivity.this, PersonDetaill, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }catch(Exception e){
+
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
